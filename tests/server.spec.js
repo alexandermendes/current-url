@@ -17,14 +17,14 @@ describe('Server', () => {
     expect(currentUrl.href).toBe('http://example.com/server?foo=bar');
   });
 
-  it.only('respects proxies', () => {
+  it('respects proxies', () => {
     const req = new IncomingMessage();
 
     req.headers = {
       'x-forwarded-protocol': 'https',
       'x-forwarded-host': 'original.com',
       'x-forwarded-port': '1234',
-    }
+    };
 
     const currentUrl = getCurrentUrl(req, { original: true });
 
@@ -34,13 +34,13 @@ describe('Server', () => {
 
   it('throws if no request object is given', () => {
     expect(() => getCurrentUrl()).toThrow(
-      'A request object is required to get the current URL on the server.'
+      'A request object is required to get the current URL on the server.',
     );
   });
 
   it('throws if an invalid request object is given', () => {
     expect(() => getCurrentUrl({})).toThrow(
-      'The request object must be an instance of `IncomingMessage`.'
+      'The request object must be an instance of `IncomingMessage`.',
     );
   });
 });

@@ -7,7 +7,7 @@ export const getCurrentUrl = (req, opts = {}) => {
   }
 
   if (!(req instanceof IncomingMessage)) {
-    throw new Error(`The request object must be an instance of \`IncomingMessage\`.`);
+    throw new Error('The request object must be an instance of `IncomingMessage`.');
   }
 
   if (opts.original) {

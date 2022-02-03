@@ -8,9 +8,11 @@
     "jest"
   ],
   "env": {
-    "jest/globals": true
+    "jest/globals": true,
+    "browser": true
   },
   "rules": {
-    "global-require": "off"
+    "global-require": "off",
+    "import/prefer-default-export": "off"
   }
 }
