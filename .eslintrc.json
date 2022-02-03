@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:jest/recommended"
+  ],
+  "parser": "@babel/eslint-parser",
+  "plugins": [
+    "jest"
+  ],
+  "env": {
+    "jest/globals": true
+  },
+  "rules": {
+    "global-require": "off"
+  }
+}
