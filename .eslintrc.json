@@ -13,6 +13,7 @@
   },
   "rules": {
     "global-require": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "jest/no-done-callback": "off"
   }
 }

@@ -3,9 +3,7 @@
  */
 import express from 'express';
 import fetch from 'node-fetch';
-import { IncomingMessage } from 'http';
 import { getCurrentUrl } from '../src';
-
 
 let lastReq;
 let server;
@@ -13,7 +11,11 @@ let server;
 beforeAll((done) => {
   const app = express();
 
-  app.get('*', (req, res) => (lastReq = req, res.sendStatus(200)));
+  app.get('*', (req, res) => {
+    lastReq = req;
+    res.sendStatus(200);
+  });
+
   server = app.listen(done);
 });
 
@@ -24,7 +26,7 @@ afterAll((done) => {
 const getBaseUrl = () => `http://localhost:${server.address().port}`;
 
 const createRequest = async (endpoint, opts) => {
-  const url = new URL(endpoint || '/', getBaseUrl())
+  const url = new URL(endpoint || '/', getBaseUrl());
 
   await fetch(url.href, opts);
 

@@ -1,5 +1,4 @@
 import { IncomingMessage } from 'http';
-import { url } from 'inspector';
 import originalUrl from 'original-url';
 import { parse as parseUrl } from 'url';
 
@@ -24,7 +23,7 @@ const parseHostHeader = (req) => {
   const protocol = urlProtocol || hostProtocol || fallbackProtocol;
 
   return parseUrl(hostProtocol ? host : `${protocol}//${host}`);
-}
+};
 
 export const getCurrentUrl = (req, opts = {}) => {
   if (!req) {
