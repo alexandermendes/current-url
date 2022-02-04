@@ -1,35 +1,82 @@
 /**
  * @jest-environment node
  */
+import express from 'express';
+import fetch from 'node-fetch';
 import { IncomingMessage } from 'http';
-
 import { getCurrentUrl } from '../src';
 
-describe('Server', () => {
-  it('returns the current URL', () => {
-    const req = new IncomingMessage();
 
-    req.url = 'http://example.com/server?foo=bar';
+let lastReq;
+let server;
+
+beforeAll((done) => {
+  const app = express();
+
+  app.get('*', (req, res) => (lastReq = req, res.sendStatus(200)));
+  server = app.listen(done);
+});
+
+afterAll((done) => {
+  server.close(done);
+});
+
+const getBaseUrl = () => `http://localhost:${server.address().port}`;
+
+const createRequest = async (endpoint, opts) => {
+  const url = new URL(endpoint || '/', getBaseUrl())
+
+  await fetch(url.href, opts);
+
+  return lastReq;
+};
+
+describe('Server', () => {
+  it('returns the current URL', async () => {
+    const endpoint = '/server?foo=bar';
+    const req = await createRequest(endpoint);
 
     const currentUrl = getCurrentUrl(req);
+    const { href: expectedUrl } = new URL(endpoint, getBaseUrl());
 
     expect(currentUrl).toBeInstanceOf(URL);
-    expect(currentUrl.href).toBe('http://example.com/server?foo=bar');
+    expect(currentUrl.href).toBe(expectedUrl);
   });
 
-  it('respects proxies', () => {
-    const req = new IncomingMessage();
+  describe('proxies', () => {
+    it('respects proxies by default', async () => {
+      const endpoint = '/page';
+      const req = await createRequest(endpoint, {
+        headers: {
+          'x-forwarded-protocol': 'https',
+          'x-forwarded-host': 'original.com',
+          'x-forwarded-port': '1234',
+        },
+      });
 
-    req.headers = {
-      'x-forwarded-protocol': 'https',
-      'x-forwarded-host': 'original.com',
-      'x-forwarded-port': '1234',
-    };
+      const currentUrl = getCurrentUrl(req);
+      const { href: expectedUrl } = new URL(endpoint, 'https://original.com:1234');
 
-    const currentUrl = getCurrentUrl(req, { original: true });
+      expect(currentUrl).toBeInstanceOf(URL);
+      expect(currentUrl.href).toBe(expectedUrl);
+    });
 
-    expect(currentUrl).toBeInstanceOf(URL);
-    expect(currentUrl.href).toBe('https://original.com:1234/');
+    it('ignores proxies if the relevant option is set', async () => {
+      const endpoint = '/page';
+      const req = await createRequest(endpoint, {
+        headers: {
+          'x-forwarded-protocol': 'https',
+          'x-forwarded-host': 'original.com',
+          'x-forwarded-port': '1234',
+        },
+      });
+
+      const currentUrl = getCurrentUrl(req, { ignoreProxies: true });
+      const { href: expectedUrl } = new URL(endpoint, getBaseUrl());
+
+      expect(currentUrl).toBeInstanceOf(URL);
+      expect(currentUrl.href).toBe(expectedUrl);
+    });
   });
 
   it('throws if no request object is given', () => {

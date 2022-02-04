@@ -27,18 +27,20 @@ import { currentUrl } from 'current-url';
 
 currentUrl(req);
 
-// Respect proxies
-currentUrl(req, { original: true });
+// Ignore proxies
+currentUrl(req, { ignoreProxies: true });
 ```
 
 In both cases the function returns a `URL` object.
 
 ## Options
 
-### `original`
+### `ignoreProxies`
 
 Type: `object`
 Default: `false`
 
-Take into account potential URL rewrites made by proxies, load balancers, etc.
-along the way (as long as these append special HTTP headers to the request).
+By default, the `currentUrl` function will take into account potential URL
+rewrites made by proxies, load balancers, etc. along the way (as long as these
+append special HTTP headers to the request). Use this option to disable that
+behaviour.
