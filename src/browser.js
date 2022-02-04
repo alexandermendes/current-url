@@ -1,1 +1,1 @@
-export const getCurrentUrl = () => new URL(window.location.href);
+export const currentUrl = () => new URL(window.location.href);

@@ -1,4 +1,4 @@
-import { getCurrentUrl } from '../src';
+import { currentUrl } from '../src';
 
 describe('Browser', () => {
   beforeAll(() => {
@@ -11,9 +11,9 @@ describe('Browser', () => {
   });
 
   it('returns the current URL', () => {
-    const currentUrl = getCurrentUrl();
+    const actualUrl = currentUrl();
 
-    expect(currentUrl).toBeInstanceOf(URL);
-    expect(currentUrl.href).toBe('http://example.com/browser?foo=bar');
+    expect(actualUrl).toBeInstanceOf(URL);
+    expect(actualUrl.href).toBe('http://example.com/browser?foo=bar');
   });
 });

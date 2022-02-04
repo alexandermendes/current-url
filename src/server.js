@@ -25,7 +25,7 @@ const parseHostHeader = (req) => {
   return parseUrl(hostProtocol ? host : `${protocol}//${host}`);
 };
 
-export const getCurrentUrl = (req, opts = {}) => {
+export const currentUrl = (req, opts = {}) => {
   if (!req) {
     throw new Error('A request object is required to get the current URL on the server.');
   }
