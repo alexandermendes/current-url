@@ -41,6 +41,12 @@
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-env": "^7.9.6",
     "@commitlint/config-conventional": "^16.0.0",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.2",
+    "@semantic-release/npm": "^9.0.0",
+    "@semantic-release/release-notes-generator": "^10.0.3",
     "babel-jest": "^25.5.1",
     "commitlint": "^8.3.5",
     "cross-env": "^7.0.3",
@@ -52,6 +58,7 @@
     "husky": "^4.2.5",
     "jest": "^25.5.4",
     "node-fetch": "^2.6.7",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "semantic-release": "^19.0.2"
   }
 }

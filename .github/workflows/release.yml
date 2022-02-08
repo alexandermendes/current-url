@@ -13,10 +13,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
       - name: Install
         run: yarn install --frozen-lockfile --non-interactive
-      - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v2
+      - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn run semantic-release
