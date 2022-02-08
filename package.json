@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel src -d dist --ignore *.test.js",
+    "build": "babel src -d dist",
     "test": "jest",
     "prebuild": "rimraf dist",
     "lint": "eslint .",
@@ -21,6 +21,7 @@
     "url": "https://github.com/alexandermendes/current-url/issues"
   },
   "files": [
+    "src",
     "dist"
   ],
   "husky": {
