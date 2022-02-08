@@ -10,3 +10,7 @@ jobs:
   release:
     needs: test
     uses: alexandermendes/workflows/.github/workflows/release-js-package.yml@master
+    with:
+      npmToken: ${{ secrets.NPM_TOKEN }}
+      gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
