@@ -5,4 +5,4 @@ on:
 
 jobs:
   test:
-    uses: alexandermendes/workflows/test-js-package.yml
+    uses: alexandermendes/workflows/test-js-package.yml@master

@@ -5,8 +5,8 @@ on:
 
 jobs:
   test:
-    uses: alexandermendes/workflows/workflows/test-js-package.yml@master
+    uses: alexandermendes/workflows/.github/workflows/test-js-package.yml@master
 
   release:
     needs: test
-    uses: alexandermendes/workflows/workflows/release-js-package.yml@master
+    uses: alexandermendes/workflows/.github/workflows/release-js-package.yml@master
