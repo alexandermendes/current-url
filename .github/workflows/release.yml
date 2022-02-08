@@ -4,13 +4,20 @@ on:
       - master
 
 jobs:
-  test:
-    uses: alexandermendes/workflows/.github/workflows/test-js-package.yml@master
+  jobs:
+    test:
+      uses: ./.github/workflows/test.yml
 
   release:
     needs: test
-    uses: alexandermendes/workflows/.github/workflows/release-js-package.yml@master
-    with:
-      npmToken: ${{ secrets.NPM_TOKEN }}
-      gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install
+        run: yarn install --frozen-lockfile --non-interactive
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
