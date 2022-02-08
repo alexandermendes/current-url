@@ -37,7 +37,7 @@ In both cases the function returns a `URL` object.
 
 ### `ignoreProxies`
 
-Type: `object`
+Type: `object`\
 Default: `false`
 
 By default, the `currentUrl` function will take into account potential URL
