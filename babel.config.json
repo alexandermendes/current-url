@@ -1,12 +1,14 @@
 {
   "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "node": true
-        }
+    ["@babel/preset-env", {
+      "targets": {
+        "node": "current"
       }
-    ]
-  ]
+    }]
+  ],
+  "env": {
+    "browser": {
+      "presets": ["@babel/preset-env"]
+    }
+  }
 }
