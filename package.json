@@ -33,6 +33,7 @@
     }
   },
   "dependencies": {
+    "get-request-origin": "^1.0.0",
     "original-url": "^1.2.3"
   },
   "devDependencies": {

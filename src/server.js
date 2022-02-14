@@ -1,6 +1,6 @@
 import { IncomingMessage } from 'http';
 import originalUrl from 'original-url';
-import { parse as parseUrl } from 'url';
+import { getRequestOrigin } from 'get-request-origin';
 
 const isIncomingMessage = (req) => (
   req.name === 'IncomingMessage'
@@ -8,33 +8,9 @@ const isIncomingMessage = (req) => (
   || req instanceof IncomingMessage
 );
 
-const parseHostHeader = (req) => {
-  const { host } = req.headers;
-
-  if (typeof host !== 'string') {
-    return {};
-  }
-
-  const { protocol: urlProtocol } = parseUrl(req.originalUrl || req.url || '');
-  const secure = req.secure || (req.connection && req.connection.encrypted);
-  const protocolPattern = /^(?:[a-z]+:)?\/\//i;
-  const hostProtocol = protocolPattern.test(host) ? host.match(protocolPattern)[0] : null;
-  const fallbackProtocol = secure ? 'https:' : 'http:';
-  const protocol = urlProtocol || hostProtocol || fallbackProtocol;
-
-  return parseUrl(hostProtocol ? host : `${protocol}//${host}`);
-};
-
-const getProxiedUrl = (req) => {
-  const url = new URL(originalUrl(req).full);
-
-  if (req.headers['x-replaced-path']) {
-    url.pathname = req.headers['x-replaced-path'];
-  }
-
-  return url;
-};
-
+/**
+ * Get the current URL from a Node request object.
+ */
 export const currentUrl = (req, opts = {}) => {
   if (!req) {
     throw new Error('A request object is required to get the current URL on the server.');
@@ -44,12 +20,15 @@ export const currentUrl = (req, opts = {}) => {
     throw new Error('The request object must be an instance of `IncomingMessage`.');
   }
 
-  if (!opts.ignoreProxies) {
-    return getProxiedUrl(req);
+  if (opts.ignoreProxies) {
+    return new URL(req.originalUrl || req.url, getRequestOrigin(req));
   }
 
-  const { protocol, hostname, port } = parseHostHeader(req);
-  const baseUrl = `${protocol}//${hostname}${port ? `:${port}` : ''}`;
+  const url = new URL(originalUrl(req).full);
 
-  return new URL(req.originalUrl || req.url, baseUrl);
+  if (req.headers['x-replaced-path']) {
+    url.pathname = req.headers['x-replaced-path'];
+  }
+
+  return url;
 };

@@ -3934,6 +3934,11 @@ get-intrinsic@^1.0.2, get-intrinsic@^1.1.0, get-intrinsic@^1.1.1:
     has "^1.0.3"
     has-symbols "^1.0.1"
 
+get-request-origin@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/get-request-origin/-/get-request-origin-1.0.0.tgz#bc866d23a7e068b780639946f334951e4fd4e30e"
+  integrity sha512-zXHYXncVPLZix4NM0gyL+ZhiGPGr9htJm/TlxWyCmGvOiFb/FqORIjBSiPqK8HVMQ0LnhnfFeaUkOjGc7GhhWw==
+
 get-stdin@7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-7.0.0.tgz#8d5de98f15171a125c5e516643c7a6d0ea8a96f6"
