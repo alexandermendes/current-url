@@ -115,7 +115,7 @@ describe('Server', () => {
     });
   });
 
-  describe('invaliid invocation', () => {
+  describe('invalid invocation', () => {
     it('throws if no request object is given', () => {
       expect(() => currentUrl()).toThrow(
         'A request object is required to get the current URL on the server.',
