@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/alexandermendes/current-url/compare/v2.0.3...v2.1.0) (2022-02-14)
+
+
+### Features
+
+* support the X-Replaced-Path header ([f4b779c](https://github.com/alexandermendes/current-url/commit/f4b779cea99d68d9235809d14c212935ed23170f))
+
 ## [2.0.3](https://github.com/alexandermendes/current-url/compare/v2.0.2...v2.0.3) (2022-02-09)
 
 
