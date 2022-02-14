@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/alexandermendes/current-url/compare/v2.1.0...v2.1.1) (2022-02-14)
+
+
+### Bug Fixes
+
+* move some logic out to a get-request-origin pkg ([8f4dcc8](https://github.com/alexandermendes/current-url/commit/8f4dcc88043cc52b7763941cb1df5e1172303c84))
+
 # [2.1.0](https://github.com/alexandermendes/current-url/compare/v2.0.3...v2.1.0) (2022-02-14)
 
 
