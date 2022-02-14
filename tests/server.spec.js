@@ -81,15 +81,51 @@ describe('Server', () => {
     });
   });
 
-  it('throws if no request object is given', () => {
-    expect(() => currentUrl()).toThrow(
-      'A request object is required to get the current URL on the server.',
-    );
+  describe('X-Replaced-Path', () => {
+    it('respects replaced paths', async () => {
+      const endpoint = '/rewritten/page';
+      const originalEndpoint = '/original/page';
+      const req = await createRequest(endpoint, {
+        headers: {
+          'x-replaced-path': originalEndpoint,
+        },
+      });
+
+      const actualUrl = currentUrl(req);
+      const { href: expectedUrl } = new URL(originalEndpoint, getBaseUrl());
+
+      expect(actualUrl).toBeInstanceOf(URL);
+      expect(actualUrl.href).toBe(expectedUrl);
+    });
+
+    it('respects replaced paths with query params', async () => {
+      const endpoint = '/rewritten/page?foo=bar';
+      const originalEndpoint = '/original/page';
+      const req = await createRequest(endpoint, {
+        headers: {
+          'x-replaced-path': originalEndpoint,
+        },
+      });
+
+      const actualUrl = currentUrl(req);
+      const { href: expectedUrl } = new URL(`${originalEndpoint}?foo=bar`, getBaseUrl());
+
+      expect(actualUrl).toBeInstanceOf(URL);
+      expect(actualUrl.href).toBe(expectedUrl);
+    });
   });
 
-  it('throws if an invalid request object is given', () => {
-    expect(() => currentUrl({})).toThrow(
-      'The request object must be an instance of `IncomingMessage`.',
-    );
+  describe('invaliid invocation', () => {
+    it('throws if no request object is given', () => {
+      expect(() => currentUrl()).toThrow(
+        'A request object is required to get the current URL on the server.',
+      );
+    });
+
+    it('throws if an invalid request object is given', () => {
+      expect(() => currentUrl({})).toThrow(
+        'The request object must be an instance of `IncomingMessage`.',
+      );
+    });
   });
 });

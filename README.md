@@ -4,6 +4,18 @@
 
 Get the current URL isomorphically.
 
+Respects the following HTTP headers:
+- `Host`
+- `Forwarded`
+- `X-Forwarded-Proto`
+- `X-Forwarded-Protocol`
+- `X-Url-Scheme`
+- `Front-End-Https`
+- `X-Forwarded-Ssl`
+- `X-Forwarded-Host`
+- `X-Forwarded-Port`
+- `X-Replaced-Path`
+
 ## Installation
 
 ```

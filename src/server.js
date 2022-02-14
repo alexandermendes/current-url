@@ -25,6 +25,16 @@ const parseHostHeader = (req) => {
   return parseUrl(hostProtocol ? host : `${protocol}//${host}`);
 };
 
+const getProxiedUrl = (req) => {
+  const url = new URL(originalUrl(req).full);
+
+  if (req.headers['x-replaced-path']) {
+    url.pathname = req.headers['x-replaced-path'];
+  }
+
+  return url;
+};
+
 export const currentUrl = (req, opts = {}) => {
   if (!req) {
     throw new Error('A request object is required to get the current URL on the server.');
@@ -35,7 +45,7 @@ export const currentUrl = (req, opts = {}) => {
   }
 
   if (!opts.ignoreProxies) {
-    return new URL(originalUrl(req).full);
+    return getProxiedUrl(req);
   }
 
   const { protocol, hostname, port } = parseHostHeader(req);
