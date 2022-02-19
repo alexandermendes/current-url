@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - master
-      - shared-workflows
 
 jobs:
   test:
