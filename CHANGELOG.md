@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/alexandermendes/current-url/compare/v2.1.1...v2.1.2) (2022-05-24)
+
+
+### Bug Fixes
+
+* bump get-request-origin ([56f7ab8](https://github.com/alexandermendes/current-url/commit/56f7ab8898288347956daad0670e2c1227040af0))
+
 ## [2.1.1](https://github.com/alexandermendes/current-url/compare/v2.1.0...v2.1.1) (2022-02-14)
 
 

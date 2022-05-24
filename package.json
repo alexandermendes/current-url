@@ -1,6 +1,6 @@
 {
   "name": "current-url",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Get the current URL isomorphically.",
   "author": "Alex Mendes",
   "license": "MIT",
