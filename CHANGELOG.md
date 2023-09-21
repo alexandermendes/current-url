@@ -1,3 +1,10 @@
+## [2.2.3](https://github.com/alexandermendes/current-url/compare/v2.2.2...v2.2.3) (2023-09-21)
+
+
+### Bug Fixes
+
+* throw if no url could be established ([66e497d](https://github.com/alexandermendes/current-url/commit/66e497dbd5db1c87e9ba1c98dfd86f5eba15082e))
+
 ## [2.2.2](https://github.com/alexandermendes/current-url/compare/v2.2.1...v2.2.2) (2023-09-21)
 
 
