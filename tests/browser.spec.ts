@@ -1,4 +1,7 @@
-import { currentUrl } from '../src';
+/**
+ * @jest-environment jsdom
+ */
+import { currentUrl } from '../src/browser';
 
 describe('Browser', () => {
   beforeAll(() => {

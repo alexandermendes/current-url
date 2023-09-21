@@ -1,14 +1,20 @@
 {
   "presets": [
-    ["@babel/preset-env", {
-      "targets": {
-        "node": "current"
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        }
       }
-    }]
+    ]
   ],
   "env": {
-    "browser": {
-      "presets": ["@babel/preset-env"]
+    "test": {
+      "plugins": [
+        "@babel/plugin-transform-runtime"
+      ]
     }
   }
 }

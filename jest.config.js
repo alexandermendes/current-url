@@ -1,5 +1,5 @@
 module.exports = {
   clearMocks: true,
   testPathIgnorePatterns: ['node_modules', 'dist'],
-  transform: { '^.+\\.[t|j]sx?$': 'babel-jest' },
+  preset: 'ts-jest/presets/js-with-babel',
 };

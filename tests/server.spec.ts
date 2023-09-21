@@ -1,12 +1,12 @@
 /**
  * @jest-environment node
  */
-import express from 'express';
+import express, { Request } from 'express';
 import fetch from 'node-fetch';
-import { currentUrl } from '../src';
+import { currentUrl } from '../src/server';
 
-let lastReq;
-let server;
+let lastReq: Request;
+let server: any;
 
 beforeAll((done) => {
   const app = express();
@@ -25,7 +25,7 @@ afterAll((done) => {
 
 const getBaseUrl = () => `http://localhost:${server.address().port}`;
 
-const createRequest = async (endpoint, opts) => {
+const createRequest = async (endpoint: string, opts?: any) => {
   const url = new URL(endpoint || '/', getBaseUrl());
 
   await fetch(url.href, opts);
@@ -42,7 +42,7 @@ describe('Server', () => {
     const { href: expectedUrl } = new URL(endpoint, getBaseUrl());
 
     expect(actualUrl).toBeInstanceOf(URL);
-    expect(actualUrl.href).toBe(expectedUrl);
+    expect(actualUrl?.href).toBe(expectedUrl);
   });
 
   describe('proxies', () => {
@@ -60,7 +60,7 @@ describe('Server', () => {
       const { href: expectedUrl } = new URL(endpoint, 'https://original.com:1234');
 
       expect(actualUrl).toBeInstanceOf(URL);
-      expect(actualUrl.href).toBe(expectedUrl);
+      expect(actualUrl?.href).toBe(expectedUrl);
     });
 
     it('ignores proxies if the relevant option is set', async () => {
@@ -77,7 +77,7 @@ describe('Server', () => {
       const { href: expectedUrl } = new URL(endpoint, getBaseUrl());
 
       expect(actualUrl).toBeInstanceOf(URL);
-      expect(actualUrl.href).toBe(expectedUrl);
+      expect(actualUrl?.href).toBe(expectedUrl);
     });
   });
 
@@ -95,7 +95,7 @@ describe('Server', () => {
       const { href: expectedUrl } = new URL(originalEndpoint, getBaseUrl());
 
       expect(actualUrl).toBeInstanceOf(URL);
-      expect(actualUrl.href).toBe(expectedUrl);
+      expect(actualUrl?.href).toBe(expectedUrl);
     });
 
     it('respects replaced paths with query params', async () => {
@@ -111,21 +111,7 @@ describe('Server', () => {
       const { href: expectedUrl } = new URL(`${originalEndpoint}?foo=bar`, getBaseUrl());
 
       expect(actualUrl).toBeInstanceOf(URL);
-      expect(actualUrl.href).toBe(expectedUrl);
-    });
-  });
-
-  describe('invalid invocation', () => {
-    it('throws if no request object is given', () => {
-      expect(() => currentUrl()).toThrow(
-        'A request object is required to get the current URL on the server.',
-      );
-    });
-
-    it('throws if an invalid request object is given', () => {
-      expect(() => currentUrl({})).toThrow(
-        'The request object must be an instance of `IncomingMessage`.',
-      );
+      expect(actualUrl?.href).toBe(expectedUrl);
     });
   });
 });

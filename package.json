@@ -7,13 +7,13 @@
   "main": "dist/node/index.js",
   "browser": "dist/browser/index.js",
   "scripts": {
-    "build:node": "cross-env BABEL_ENV=node babel src --out-dir dist/node",
-    "build:browser": "cross-env BABEL_ENV=browser babel src --out-dir dist/browser",
-    "build": "yarn build:node && yarn build:browser",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build": "tsc -p tsconfig.json",
     "test": "jest",
     "prebuild": "rimraf dist",
     "lint": "eslint .",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -33,14 +33,17 @@
     }
   },
   "dependencies": {
-    "get-request-origin": "^1.0.1",
-    "original-url": "^1.2.3"
+    "get-request-origin": "^1.1.0",
+    "original-url": "^1.2.3",
+    "typescript": "^5.0.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.6",
-    "@babel/eslint-parser": "^7.17.0",
-    "@babel/preset-env": "^7.9.6",
+    "@babel/cli": "^7.22.15",
+    "@babel/core": "^7.22.20",
+    "@babel/eslint-parser": "^7.22.15",
+    "@babel/plugin-transform-runtime": "^7.22.15",
+    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-typescript": "^7.22.15",
     "@commitlint/config-conventional": "^16.0.0",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
@@ -48,7 +51,11 @@
     "@semantic-release/github": "^8.0.2",
     "@semantic-release/npm": "^9.0.0",
     "@semantic-release/release-notes-generator": "^10.0.3",
-    "babel-jest": "^25.5.1",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.5",
+    "@types/node-fetch": "^2.6.5",
+    "@types/original-url": "^1.2.0",
+    "babel-plugin-dynamic-import-node": "^2.3.3",
     "commitlint": "^8.3.5",
     "cross-env": "^7.0.3",
     "eslint": "^8.8.0",
@@ -57,9 +64,11 @@
     "eslint-plugin-jest": "^26.0.0",
     "express": "^4.17.2",
     "husky": "^4.2.5",
-    "jest": "^25.5.4",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "node-fetch": "^2.6.7",
     "rimraf": "^3.0.2",
-    "semantic-release": "^19.0.2"
+    "semantic-release": "^19.0.2",
+    "ts-jest": "^29.1.1"
   }
 }
