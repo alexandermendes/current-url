@@ -21,14 +21,19 @@ export const currentUrl = (
     throw new Error('A request object is required to get the current URL on the server.');
   }
 
+  const urlWithoutProxies = new URL(
+    req.originalUrl || req.url || '',
+    getRequestOrigin(req),
+  );
+
   if (opts.ignoreProxies) {
-    return new URL(req.originalUrl || req.url || '', getRequestOrigin(req));
+    return urlWithoutProxies;
   }
 
   const origUrl = originalUrl(req).full;
 
   if (!origUrl) {
-    throw new Error('A URL could not be established from the given request object.');
+    throw urlWithoutProxies;
   }
 
   const url = new URL(origUrl);
