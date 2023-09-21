@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/alexandermendes/current-url/compare/v2.2.3...v2.3.0) (2023-09-21)
+
+
+### Features
+
+* return url without proxies if no proxies can be established ([2e35848](https://github.com/alexandermendes/current-url/commit/2e35848658bbdd012d0d8e1a4ac736395cf697b2))
+
 ## [2.2.3](https://github.com/alexandermendes/current-url/compare/v2.2.2...v2.2.3) (2023-09-21)
 
 
