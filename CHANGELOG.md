@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/alexandermendes/current-url/compare/v2.1.2...v2.2.0) (2023-09-21)
+
+
+### Features
+
+* migrate to typescript ([db8c70d](https://github.com/alexandermendes/current-url/commit/db8c70d1d28becf71952bd19224d01e8518ce378))
+
 ## [2.1.2](https://github.com/alexandermendes/current-url/compare/v2.1.1...v2.1.2) (2022-05-24)
 
 
