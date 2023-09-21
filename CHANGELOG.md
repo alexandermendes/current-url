@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/alexandermendes/current-url/compare/v2.2.0...v2.2.1) (2023-09-21)
+
+
+### Bug Fixes
+
+* export declarations ([dd62f94](https://github.com/alexandermendes/current-url/commit/dd62f94e52eb68ff387655a8967484efd036c90e))
+
 # [2.2.0](https://github.com/alexandermendes/current-url/compare/v2.1.2...v2.2.0) (2023-09-21)
 
 
