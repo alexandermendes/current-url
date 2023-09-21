@@ -4,8 +4,8 @@
   "description": "Get the current URL isomorphically.",
   "author": "Alex Mendes",
   "license": "MIT",
-  "main": "dist/node/index.js",
-  "browser": "dist/browser/index.js",
+  "main": "dist/node.js",
+  "browser": "dist/browser.js",
   "scripts": {
     "build:types": "tsc --emitDeclarationOnly",
     "build": "tsc -p tsconfig.json",
