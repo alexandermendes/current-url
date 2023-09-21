@@ -16,7 +16,7 @@ type Request = IncomingMessage & {
 export const currentUrl = (
   req: Request,
   opts: { ignoreProxies?: boolean } = {},
-) => {
+): URL => {
   if (!req) {
     throw new Error('A request object is required to get the current URL on the server.');
   }
@@ -28,7 +28,7 @@ export const currentUrl = (
   const origUrl = originalUrl(req).full;
 
   if (!origUrl) {
-    return;
+    throw new Error('A URL could not be established from the given request object.');
   }
 
   const url = new URL(origUrl);
